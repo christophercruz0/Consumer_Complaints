@@ -1,0 +1,17 @@
+CREATE TABLE complaints6 (
+    date_received DATE,
+    product VARCHAR(100),
+    sub_product VARCHAR(100),
+    issue VARCHAR(150),
+    sub_issue VARCHAR(200),
+    company VARCHAR(150),
+    state VARCHAR(100),
+    zip_code VARCHAR(100),
+    consumer_consent_provided VARCHAR(100),
+    submitted_via VARCHAR(200),
+    date_sent_to_company DATE,
+    company_response_to_consumer VARCHAR(500),
+    timely_response VARCHAR(500),
+    complaint_ID INT,
+    PRIMARY KEY (Complaint_ID)
+   );
