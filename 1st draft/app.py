@@ -1,41 +1,59 @@
-import sqlalchemy
-import psycopg2
-import datetime as dt
-import numpy as np
-from sqlalchemy.ext.automap import automap_base
+
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine , inspect , func
-from flask import Flask, jsonify, render_template
+from sqlalchemy import create_engine
+from flask import Flask, jsonify
 from flask_cors import CORS
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine, Column, Integer, String, Date
 
-db_password = 'postgres'
 
-# Path to sqlite
-database_path = f"postgresql://postgres:{db_password}@127.0.0.1:5432/Consumer_complaints_db"
+# Create table class 
+Base = declarative_base()
+class Complaints(Base):
+    __tablename__ = 'complaints'
+    date_received  = Column(Date)
+    product  = Column(String)
+    sub_product = Column(String)
+    issue = Column(String)
+    sub_issue = Column(String)
+    company = Column(String)
+    state = Column(String)
+    zip_code = Column(String)
+    consumer_consent_provided = Column(String)
+    submitted_via = Column(String)
+    date_sent_to_company = Column(Date)
+    company_response_to_consumer = Column(String)
+    timely_response = Column(String)
+    complaint_ID = Column(Integer, primary_key=True)
 
-# Create an engine that can talk to the database
+# path to sqlite database
+database_path = "sqlite:///complaints.sqlite"
+
+# create engine and databse 
 engine = create_engine(database_path)
+Base.metadata.create_all(engine)
 
-Base = automap_base()
-Base.prepare(autoload_with=engine)
-Complaints = Base.classes.complaints
 
+# Create a Flask object 
 app = Flask(__name__)
+
+# enable CORS for API requests with dashboard
 CORS(app)
 
-@app.route("/api/v1.0/productdata")
+# TODO:create multiple routes for API Request
+
+
+@app.route("/api/v1.0/productdata.json")
 def productData():
     session = Session(engine)
-    sel1 = [Complaints.product, func.count(Complaints.product)]
-    productData = session.query(*sel1).group_by(Complaints.product).all()
+    
+    productData = session.execute('''SELECT product, COUNT(product) 
+                                    FROM complaints 
+                                    GROUP BY product ''').fetchall()
     session.close()
-    product_count = []
-    for name,count in productData:
-        product_count_dict = {}
-        product_count_dict["name"] = name
-        product_count_dict["count"] = count
-        product_count.append(product_count_dict)   
-    return product_count
+    
+    product_count = dict(productData)
+    return jsonify(product_count)
  
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port= 5001)
