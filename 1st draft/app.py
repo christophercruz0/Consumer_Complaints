@@ -27,7 +27,7 @@ class Complaints(Base):
     complaint_ID = Column(Integer, primary_key=True)
 
 # path to sqlite database
-database_path = "sqlite:///complaints.sqlite"
+database_path = "sqlite:///../Resources/complaints.sqlite"
 
 # create engine and databse 
 engine = create_engine(database_path)
@@ -42,7 +42,6 @@ CORS(app)
 
 # TODO:create multiple routes for API Request
 
-
 @app.route("/api/v1.0/productdata.json")
 def productData():
     session = Session(engine)
@@ -51,7 +50,7 @@ def productData():
                                     FROM complaints 
                                     GROUP BY product ''').fetchall()
     session.close()
-    
+
     product_count = dict(productData)
     return jsonify(product_count)
  
