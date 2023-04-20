@@ -1,4 +1,4 @@
-<h1 align="center"> Consumer Credit Complaints </h1>
+<h1 align="center"> Consumer Complaints </h1>
 
 ## Description
 
