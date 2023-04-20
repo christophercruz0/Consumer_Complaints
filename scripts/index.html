@@ -9,27 +9,27 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <style>
     .jumbotron {
-        color:rgb(252, 252, 252);
+        color:rgb(255, 255, 255);
         background-color: rgb(22, 153, 173);
     }
     .panel{
-        color:rgb(255, 255, 255);
+        color:rgb(0, 0, 0);
         background-color: rgb(22, 153, 173);
         border-color: rgb(22, 153, 173);
     }
     .panel-heading{
-      background-color: rgb(22, 173, 102);
+      background-color: rgb(255, 255, 255);
     }
     .well{
       background-color: rgb(22, 153, 173);
-      color:rgb(189, 59, 59);
+      color:rgb(0, 0, 0);
     }
 </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
         <h1> Consumer Complaint Dashboard</h1>
@@ -38,48 +38,48 @@
     </div>
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-2">
         <div class="panel">
           <div class="panel-heading">
-            <h2 class="panel-title text-center">Average Complaints by Month</h2>
+            <h2 class="panel-title text-center">Count of Product</h2>
           </div>
-          <div id="avg_complaints_month" class="panel-body"></div>
+          <div id="product_count" class="panel-body"></div>
         </div>
       </div>
 
-      <div class="col-md-2">
-        <div class="well">
-          <h4>Select Month:</h4>
+      <div class="col-md-8">
+        <div class="well text-center">
+          <h4>Select Product:</h4>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
       </div>
 
-      <div class="col-md-5">
+      <div class="col-md-2">
         <div class="panel">
           <div class="panel-heading">
             <h3 class="panel-title text-center">Number of Unique Companies</h3>
           </div>
-          <div id="num_of_unq_companies" class="panel-body"></div>
+          <div id="unq_companies" class="panel-body"></div>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-4">
-        <div id="grahp1"></div>
+      <div class="col-md-8" >
+        <canvas id="graph1" style="height : 450px"></canvas>
       </div>
       <div class="col-md-4">
         <div id="graph2"></div>
       </div>
-      <div class="col-md-4">
-        <div id="graph3"></div>
-      </div>
+
     </div>
 
     <div class="row">
-      <div class="col-md-12">
-        <!-- <div id="pie_chart"></div> -->
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+      <div class="col-md-6">
+        <canvas id="graph3" style="height: 400px"></canvas>
+      </div>
+      <div class="col-md-6">
+        <canvas id="graph4" ></canvas>
       </div>
     </div>
   </div>
