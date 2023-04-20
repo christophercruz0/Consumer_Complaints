@@ -15,7 +15,7 @@ The data was found from the Consumer Data Protection Bureau and a csv file was d
 ## Installation
 
 What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running:
-   - Download csv and place in Resources folder
+   - Download csv from link below in Features section and place in Resources folder
    - Download and run etl.ipynb
    - Download and run create_and_load_sqlite_database.ipynb
    - Download the rest of the files app.py, app.js, and index.html
@@ -35,5 +35,8 @@ In the HTML file the layout for the page is created as well as the ids that will
 ## Features & Links to data
 
 Drop Down that filters the graphs by products.
+
+Link to CSV file:
+https://drive.google.com/file/d/1qzsQb8-X30WOynfYO04x5GI1AJvHbp8u/view?usp=share_link
 
 https://www.consumerfinance.gov/data-research/consumer-complaints/search/?chartType=line&dateInterval=Month&dateRange=3y&date_received_max=2023-04-11&date_received_min=2020-04-11&lens=Overview&searchField=all&tab=Trends
