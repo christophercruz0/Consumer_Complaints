@@ -16,8 +16,7 @@ The data was found from the Consumer Data Protection Bureau and a csv file was d
 
 What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running:
    - Download csv from link below in Features section and place in Resources folder
-   - Download and run etl.ipynb
-   - Download and run create_and_load_sqlite_database.ipynb
+   - Download , clear the output and run etl_and_databse_creation.ipynb
    - Download the rest of the files app.py, app.js, and index.html
    - Run app.py so routes are live, check a route to make sure its loading.
    - View index.html in browser to view Dashboard
