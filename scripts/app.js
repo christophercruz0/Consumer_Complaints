@@ -55,7 +55,7 @@ function graph1(product){
               },
             title: {
               display: true,
-              text: "Counts of Products",
+              text: "Number of Complaints by each Products Type",
               fontSize: 30
             },
   
@@ -106,7 +106,7 @@ function graph2(product){
 
       let trace1 = {
           //x: s_month,
-          x: ["jan","Feb","Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec"],
+          x: ["Apr","May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec", "Jan","Feb","Mar",],
           y: s_count,
           name: "Consumer Complaints By Month",
           type: "bar",
@@ -120,6 +120,7 @@ function graph2(product){
       // Apply a title to the layout
       let layout = {
           title: "Consumer Complaint Trend",
+          font: {size :20},
           height: 500,
       };
       

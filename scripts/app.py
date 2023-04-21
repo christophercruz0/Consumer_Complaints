@@ -1,12 +1,9 @@
-
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from flask import Flask, jsonify
 from flask_cors import CORS
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, Column, Integer, String, Date
-from sqlalchemy import create_engine , inspect , func, desc
-
+from sqlalchemy import create_engine, Column, Integer, String, Date, func, desc, inspect
 
 # Create table class 
 Base = declarative_base()
@@ -14,17 +11,9 @@ class Complaints(Base):
     __tablename__ = 'complaints'
     date_received  = Column(Date)
     product  = Column(String)
-    #sub_product = Column(String)
-    #issue = Column(String)
-    #sub_issue = Column(String)
     company = Column(String)
-    #state = Column(String)
-    #zip_code = Column(String)
-    #consumer_consent_provided = Column(String)
-    #submitted_via = Column(String)
     date_sent_to_company = Column(Date)
     company_response_to_consumer = Column(String)
-    #timely_response = Column(String)
     complaint_ID = Column(Integer, primary_key=True)
 
 # path to sqlite database
@@ -41,20 +30,24 @@ app = Flask(__name__)
 # enable CORS for API requests with dashboard
 CORS(app)
 
-# TODO:create multiple routes for API Request
 
+# Welcome API route
 @app.route("/")
 def welcome():
     """List all available api routes."""
     return (
         f"Available Routes:<br/>"
         f"/api/v1.0/productdata.json<br/>"
-        f"/api/v1.0/names<br/>"
-        f"/api/v1.0/names<br/>"
-        f"/api/v1.0/names<br/>"
-        f"/api/v1.0/names<br/>"
+        f"/api/v1.0/leftbox.json/<product><br/>"
+        f"/api/v1.0/productpie.json/<product><br/>"
+        f"/api/v1.0/barchart/<product>"
+        f"/api/v1.0/productList<br/>"
+        f"/api/v1.0/top10Company/<product><br/>"
+        f"/api/v1.0/rightbox.json/<product>"
+       
     )
 
+# API route for number of complaints barchart
 @app.route("/api/v1.0/productdata.json")
 def productData():
     session = Session(engine)
@@ -67,7 +60,7 @@ def productData():
     dict_data = dict(data)
     return jsonify(dict_data)
 
-
+# API Route for left box
 @app.route("/api/v1.0/leftbox.json/<product>")
 def left_box(product):
     session = Session(engine)
@@ -82,7 +75,7 @@ def left_box(product):
     return jsonify(dict_data)
 
 
-# piechart data by product
+# API route for piechart
 @app.route("/api/v1.0/productpie.json/<product>")
 def productpie2(product):
     session = Session(engine)
@@ -96,7 +89,7 @@ def productpie2(product):
     dict_data = dict(data)
     return jsonify(dict_data)
 
-# def
+# API route for montly barchart
 @app.route("/api/v1.0/barchart/<product>")
 def byMonthCount(product):
     session = Session(engine)
@@ -114,6 +107,7 @@ def byMonthCount(product):
     #return product_count
     return jsonify(by_month)
  
+ # API route for drop down
 @app.route("/api/v1.0/productList")
 def byuniqueList():
     session = Session(engine)
@@ -128,6 +122,7 @@ def byuniqueList():
     #return product_count
     return jsonify(by_product)
 
+# API route for top 10 companies bar chart
 @app.route("/api/v1.0/top10Company/<product>")
 def topcompanyData(product):
     session = Session(engine)
@@ -157,7 +152,7 @@ def topcompanyData(product):
         top_10.append(top_10_dict)
     return jsonify(top_10)
 
-
+# API Route for right box
 @app.route("/api/v1.0/rightbox.json/<product>")
 def right_box(product):
     session = Session(engine)
