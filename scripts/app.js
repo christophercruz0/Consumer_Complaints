@@ -28,6 +28,8 @@ function graph4(product){
         });
     });
 
+  
+
 }
 
 function graph1(product){
@@ -58,7 +60,6 @@ function graph1(product){
               text: "Number of Complaints by each Products Type",
               fontSize: 30
             },
-  
             scales: {
               yAxes:[{
                 ticks:{
@@ -141,8 +142,6 @@ function graph3(product){
       companies.push(data[i]["company"])
       counts.push(data[i]["count"])
     }
-    console.log(companies)
-    console.log(counts)
 
       let barColors = [ "#b91d47", "#00aba9", "#2b5797", "#7z8877"]
       
@@ -209,6 +208,22 @@ function rightBox(product){
   });
 }
 
+function resetCanvas(){
+  document.getElementById("graph3").remove();     
+  let canvas3 = document.createElement('canvas');     
+  canvas3.setAttribute('id','graph3');     
+  canvas3.setAttribute("style","height : 450px");         
+  document.querySelector('#graph3_div').appendChild(canvas3);
+  document.getElementById("graph4").remove();
+       
+  let canvas4 = document.createElement('canvas');     
+  canvas4.setAttribute('id','graph4');       
+  document.querySelector('#graph4_div').appendChild(canvas4);
+  
+};
+
+
+
 function init(){
 
   const drop_down_url = "http://127.0.0.1:5001/api/v1.0/productList";
@@ -230,12 +245,13 @@ function init(){
 }
 
 function optionChanged(product) {
-    graph1(product);
-    graph2(product);
-    graph3(product);
-    graph4(product);
-    leftBox(product);
-    rightBox(product);
+  resetCanvas();
+  graph1(product);
+  graph2(product);
+  graph3(product);
+  graph4(product);
+  leftBox(product);
+  rightBox(product);
 
 
 }
